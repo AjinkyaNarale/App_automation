@@ -3,67 +3,83 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
+import org.testng.annotations.BeforeMethod;
 
-//import org.testng.annotations.Test;
-//import io.appium.java_client.android.AndroidDriver;
-//import io.appium.java_client.android.AndroidOptions;
-//import java.net.MalformedURLException;
-//import java.net.URL;
-//import java.time.Duration;
-//
-//public class First_test {
-//    @Test
-//    public void configureAppium() throws MalformedURLException {
-//        AndroidOptions options = new AndroidOptions();
-//        options.setCapability("deviceName", "sdk_gphone64_arm64");
-//        options.setCapability("app", "/Users/lord_ajinkya/Library/Android/sdk");
-//        
-//        URL url = new URL("http://0.0.0.1:4723/wd/hub");
-//        AndroidDriver driver = new AndroidDriver(url, options);
-//        
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        // Add your test logic here...
-//        
-//        driver.quit();
-//    }
-//}
+
 
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
+
 
 public class First_test {
 	public AndroidDriver driver;
 
+
 	
 	
-	@Test
+	@BeforeMethod
 	public void setUp() throws MalformedURLException {
-		// Start the Appium server
-      
-        
+		
+		
+		// set up all the phone's capabilities
 		UiAutomator2Options options=new UiAutomator2Options();
 		options.setDeviceName("sdk_gphone64_arm64");
 		options.setUdid("emulator-5554");
-//		options.setAppPackage("com.android.chrome");
 		options.setAutomationName("UiAutomator2");
 		options.setPlatformName("Android");
 		options.setCapability("goog:chromeOptions", options);
+		
+		
+		//setup app's details using the app's path
 	    options.setApp("/Users/lord_ajinkya/eclipse-workspace/Flow_login/src/test/resources/apps/app-prod-release.apk");
-		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(13));
-		options.setAutoGrantPermissions(true);
+		
+	    
+	    //setup the appium server using url
+	    driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
+		
+//		options.setAutoGrantPermissions(true);
+		
+		
+		//Wait, locate and click on continue
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+	}
+	    @Test
+		public void login() {
+			
+	    	//find element for "continue" and click
+	    	driver.findElement(AppiumBy.accessibilityId("Continue")).click();
+			
+	    	
+	    	//Find element for USERID on login page and send keys
+			WebElement userId = driver.findElement(AppiumBy.xpath("(//android.widget.EditText)[1]"));
+			userId.sendKeys("abc123");
+
+			
+//			//Wait, locate and click on forgot password
+//			driver.findElement(AppiumBy.accessibilityId("Forgot Password?")).click();
+//			
+//			
+//			//locate and click back on forgot password
+//			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//			driver.findElement(AppiumBy.className("android.widget.ImageView")).click();
+//			
+//			//locate and click on "Open an account"
+//			driver.findElement(AppiumBy.accessibilityId("Open an account")).click();
+//			
+//			//Enter mobile number for registration and send keys
+//			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+//			MobileElement mobileNumberInput = driver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"0%\"]/android.view.View/android.widget.EditText"));
+//		    mobileNumberInput.sendKeys("9172695674");
 		
 		
 		
-		driver.findElement(AppiumBy.accessibilityId("Sign in"));
+		
+//		driver.findElement(AppiumBy.accessibilityId("Sign in")).click();
 		
 //        WebElement elementToClick = driver.findElement(AppiumBy.id("com.google.android.apps.nexuslauncher:id/overview_actions_view"));
 //        elementToClick.click();
@@ -72,12 +88,7 @@ public class First_test {
 //		driver.quit();
 //		driver.findElement(find)
 	}
-//	@Test
-//    public void configureAppium() {
-//        driver.get("https://www.amazon.com");
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(13));
-//        // Your test steps here
-//    }
+
 
 }
     

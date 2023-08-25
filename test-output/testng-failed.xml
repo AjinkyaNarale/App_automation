@@ -5,6 +5,7 @@
     <classes>
       <class name="App_automation.Flow_login.Pages.First_test">
         <methods>
+          <include name="login"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- App_automation.Flow_login.Pages.First_test -->
