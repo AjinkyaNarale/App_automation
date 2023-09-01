@@ -1,5 +1,8 @@
 package App_automation.Flow_login.Pages;
 import java.net.MalformedURLException;
+
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import java.net.URL;
 import java.time.Duration;
 
@@ -19,7 +22,9 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 
 public class First_test {
 	public AndroidDriver driver;
-
+	
+		
+	
 
 	
 	
@@ -47,11 +52,11 @@ public class First_test {
 		
 		
 		//Wait, locate and click on continue
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 	}
 	    @Test
-		public void login() {
+		public void login() throws InterruptedException {
 			
 	    	
 	    	//find element for "continue" and click
@@ -61,32 +66,58 @@ public class First_test {
 	    	//Find element for USERID on login page and send keys
 
 //				WebElement userId = driver.findElements(AppiumBy.className("android.widget.EditText")).get(0);
+			    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 	    	    WebElement userId = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='4']"));
 				userId.click();
 				userId.sendKeys("IOSTEST");
 
-			//Find element for USERID on login page and send keys
+			//Find element for password on login page and send keys
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 	    	    WebElement password = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='7']"));
 	    	    password.click();
 				password.sendKeys("Astha@123");
 				
-		    //FInd element for eye icon and show the password
-				driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='0']"));
+				//this command closes the keyboard on login screen
+				driver.hideKeyboard();
+//				driver.pressKey(new KeyEvent(AndroidKey.BACK));				
 				
-				
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-				driver.navigate().back();				
 		    //Find element for sign in button and click
 				driver.findElement(AppiumBy.accessibilityId("Sign in")).click();
 				
-				driver.findElement(AppiumBy.accessibilityId("Login with OTP\n"
-						+ " instead")).click();
+			//FInd number key on keypad and click a digit
+//				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+				Thread.sleep(5000);
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_1));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_2));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_3));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_4));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_5));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_6));
+			    Thread.sleep(100);
+
+				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Verify\"]")).click();
 				
-		 
+				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"I’ll do it later\"]")).click();
+
+				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Enable Device Lock\"]")).click();
+
 				
-				  WebElement totp = driver.findElement(AppiumBy.xpath("//android.view.View[@index='1']"));
-				  totp.click();
-				  totp.sendKeys("123456");
+				//Enter numbers from the keypad
+				Thread.sleep(5000);
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_1));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_2));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_3));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_4));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_5));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_6));
+			    Thread.sleep(100);
+			    
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.ENTER));
+//	    	    WebElement cross = driver.findElement(AppiumBy.xpath("//android.widget.Button[@index='2']"));
+//                cross.click();
+				
+				
+
 
 			//Wait, locate and click on forgot password
 //			driver.findElement(AppiumBy.accessibilityId("Forgot Password?")).click();
