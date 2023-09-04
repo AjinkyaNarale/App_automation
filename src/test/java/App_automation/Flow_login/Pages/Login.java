@@ -1,4 +1,6 @@
 package App_automation.Flow_login.Pages;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import java.net.MalformedURLException;
 
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -20,12 +22,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 
 
-public class First_test {
+public class Login {
 	public AndroidDriver driver;
 	
 		
 	
 
+	
 	
 	
 	@BeforeMethod
@@ -55,7 +58,7 @@ public class First_test {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 	}
-	    @Test
+	    @Test(priority=1)
 		public void login() throws InterruptedException {
 			
 	    	
@@ -72,8 +75,8 @@ public class First_test {
 				userId.sendKeys("IOSTEST");
 
 			//Find element for password on login page and send keys
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-	    	    WebElement password = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='7']"));
+			    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+				WebElement password = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='7']"));
 	    	    password.click();
 				password.sendKeys("Astha@123");
 				
@@ -82,6 +85,7 @@ public class First_test {
 //				driver.pressKey(new KeyEvent(AndroidKey.BACK));				
 				
 		    //Find element for sign in button and click
+				Thread.sleep(2000);
 				driver.findElement(AppiumBy.accessibilityId("Sign in")).click();
 				
 			//FInd number key on keypad and click a digit
@@ -113,6 +117,34 @@ public class First_test {
 			    Thread.sleep(100);
 			    
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.ENTER));
+			    
+				Thread.sleep(5000);
+				WebElement skiptour = driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Skip Tour\"]"));
+		    	skiptour.click();
+				driver.findElement(AppiumBy.accessibilityId("Ok, got it!")).click();
+				driver.findElement(AppiumBy.accessibilityId("Search & Add Stock")).click();
+
+				Thread.sleep(3000);
+				WebElement searchStock = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='0']"));
+				searchStock.click();
+				searchStock.sendKeys("TCS");
+				WebElement AddToWatchlist = driver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"EQ\n"
+						+ "TCS\n"
+						+ "NSE\n"
+						+ "Tata Consultancy Serv Lt\"]/android.widget.ImageView"));
+				AddToWatchlist.click();
+				
+				driver.findElement(AppiumBy.accessibilityId("Cash")).click();
+				driver.findElement(AppiumBy.accessibilityId("Done")).click();
+				driver.findElement(AppiumBy.accessibilityId("Clear")).click();
+				
+				Thread.sleep(2000);
+				WebElement WatchOperations = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='1']"));
+				WatchOperations.click();
+				
+				
+
+			    
 //	    	    WebElement cross = driver.findElement(AppiumBy.xpath("//android.widget.Button[@index='2']"));
 //                cross.click();
 				
@@ -144,6 +176,13 @@ public class First_test {
 //		driver.quit();
 //		driver.findElement(find)
 	}
+		
+//		@Test(priority=2)
+//		public void testWatchlist() throws InterruptedException {
+	    	
+		
+//		}
+
 
 
 }

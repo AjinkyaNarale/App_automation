@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="App_automation.Flow_login.Pages.First_test">
+      <class name="App_automation.Flow_login.Pages.Login">
         <methods>
-          <include name="login"/>
           <include name="setUp"/>
+          <include name="testWatchlist"/>
         </methods>
-      </class> <!-- App_automation.Flow_login.Pages.First_test -->
+      </class> <!-- App_automation.Flow_login.Pages.Login -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
