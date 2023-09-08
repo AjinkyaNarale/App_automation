@@ -6,7 +6,7 @@
       <class name="App_automation.Flow_login.Pages.Login">
         <methods>
           <include name="setUp"/>
-          <include name="testWatchlist"/>
+          <include name="login"/>
         </methods>
       </class> <!-- App_automation.Flow_login.Pages.Login -->
     </classes>

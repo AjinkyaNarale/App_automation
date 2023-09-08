@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 import io.appium.java_client.AppiumBy;
 
 public class Watchlist extends Login {
-    @Test()
+    
+	@Test()
 	public void testWatchlist() throws InterruptedException {
     	WebElement skiptour = driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Skip Tour\"]"));
     	skiptour.click();

@@ -2,21 +2,11 @@ package App_automation.Flow_login.Pages;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import java.net.MalformedURLException;
-
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import java.net.URL;
 import java.time.Duration;
-
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeMethod;
-
-
-
-import org.testng.annotations.Test;
-
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -24,11 +14,6 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 
 public class Login {
 	public AndroidDriver driver;
-	
-		
-	
-
-	
 	
 	
 	@BeforeMethod
@@ -45,7 +30,7 @@ public class Login {
 		
 		
 		//setup app's details using the app's path
-	    options.setApp("/Users/lord_ajinkya/eclipse-workspace/Flow_login/src/test/resources/apps/app-prod-release.apk");
+	    options.setApp("/Users/lord_ajinkya/eclipse-workspace/Flow_login/src/test/resources/apps/Automation_build.apk");
 		
 	    
 	    //setup the appium server using url
@@ -58,8 +43,9 @@ public class Login {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 	}
-	    @Test(priority=1)
-		public void login() throws InterruptedException {
+	
+	@Test
+   	public void login() throws InterruptedException {
 			
 	    	
 	    	//find element for "continue" and click
@@ -116,75 +102,63 @@ public class Login {
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_6));
 			    Thread.sleep(100);
 			    
-			    driver.pressKey(new KeyEvent().withKey(AndroidKey.ENTER));
+			    driver.pressKey(new KeyEvent().withKey(AndroidKey.ENTER)); 
 			    
-				Thread.sleep(5000);
+			    Thread.sleep(5000);
 				WebElement skiptour = driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Skip Tour\"]"));
 		    	skiptour.click();
+		    	
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 				driver.findElement(AppiumBy.accessibilityId("Ok, got it!")).click();
+				
+                //Add stock to watchlist
 				driver.findElement(AppiumBy.accessibilityId("Search & Add Stock")).click();
 
 				Thread.sleep(3000);
 				WebElement searchStock = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='0']"));
 				searchStock.click();
 				searchStock.sendKeys("TCS");
+				
+				
+				Thread.sleep(2000);
 				WebElement AddToWatchlist = driver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"EQ\n"
 						+ "TCS\n"
 						+ "NSE\n"
 						+ "Tata Consultancy Serv Lt\"]/android.widget.ImageView"));
 				AddToWatchlist.click();
 				
-				driver.findElement(AppiumBy.accessibilityId("Cash")).click();
 				driver.findElement(AppiumBy.accessibilityId("Done")).click();
-				driver.findElement(AppiumBy.accessibilityId("Clear")).click();
 				
-				Thread.sleep(2000);
-				WebElement WatchOperations = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='1']"));
-				WatchOperations.click();
-				
-				
+				//Place order
+				Thread.sleep(5000);
 
-			    
-//	    	    WebElement cross = driver.findElement(AppiumBy.xpath("//android.widget.Button[@index='2']"));
-//                cross.click();
+				WebElement Addbuy = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc,'TCS')]"));
+				Addbuy.click();
 				
+				driver.findElement(AppiumBy.accessibilityId("Buy")).click();
+
+				driver.findElement(AppiumBy.accessibilityId("Ok, got it!")).click();
+
+				driver.findElement(AppiumBy.accessibilityId("Sell")).click();
 				
-
-
-			//Wait, locate and click on forgot password
-//			driver.findElement(AppiumBy.accessibilityId("Forgot Password?")).click();
+				driver.findElement(AppiumBy.accessibilityId("Delivery\n"
+						+ "1.0X\n"
+						+ "Max Qty 0\n"
+						+ "Tab 3 of 3")).click();
+				
 			
-			
-			//locate and click back on forgot password
-//			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//			driver.findElement(AppiumBy.className("android.widget.ImageView")).click();
-			
-			//locate and click on "Open an account"
-//			driver.findElement(AppiumBy.accessibilityId("Open an account")).click();
-			
-			//Enter mobile number for registration and send keys
-//			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-//			MobileElement mobileNumberInput = driver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"0%\"]/android.view.View/android.widget.EditText"));
-//		    mobileNumberInput.sendKeys("9172695674");
-		
-		
-//        WebElement elementToClick = driver.findElement(AppiumBy.id("com.google.android.apps.nexuslauncher:id/overview_actions_view"));
-//        elementToClick.click();
-
-
-//		driver.quit();
-//		driver.findElement(find)
-	}
-		
-//		@Test(priority=2)
-//		public void testWatchlist() throws InterruptedException {
-	    	
-		
-//		}
-
-
-
+				WebElement clickBuy = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@content-desc=\"Buy\"]"));
+				clickBuy.click();
+				
+				
+				driver.findElement(AppiumBy.accessibilityId("Delivery\n"
+						+ "1.0X\n"
+						+ "Max Qty 0\n"
+						+ "Tab 3 of 3")).click();
+				
+				WebElement buyDelivery = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@content-desc=\"Buy\"]"));
+                buyDelivery.click();
+		}
 }
     
 
