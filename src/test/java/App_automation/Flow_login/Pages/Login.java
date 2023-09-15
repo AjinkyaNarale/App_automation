@@ -30,7 +30,7 @@ public class Login {
 		
 		
 		//setup app's details using the app's path
-	    options.setApp("/Users/lord_ajinkya/eclipse-workspace/Flow_login/src/test/resources/apps/Automation_build.apk");
+	    options.setApp("/Users/lord_ajinkya/eclipse-workspace/Flow_login/src/test/resources/apps/new_automation_build.apk");
 		
 	    
 	    //setup the appium server using url
@@ -55,13 +55,13 @@ public class Login {
 	    	//Find element for USERID on login page and send keys
 
 //				WebElement userId = driver.findElements(AppiumBy.className("android.widget.EditText")).get(0);
-			    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+                Thread.sleep(3000);
 	    	    WebElement userId = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='4']"));
 				userId.click();
 				userId.sendKeys("IOSTEST");
 
 			//Find element for password on login page and send keys
-			    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+                Thread.sleep(3000);
 				WebElement password = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='7']"));
 	    	    password.click();
 				password.sendKeys("Astha@123");
@@ -85,7 +85,9 @@ public class Login {
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_6));
 			    Thread.sleep(100);
 
-				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Verify\"]")).click();
+			    //click on verify after entering TOTP
+				driver.findElement(AppiumBy.accessibilityId("Verify")).click();
+				
 				
 				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"I’ll do it later\"]")).click();
 
@@ -102,23 +104,42 @@ public class Login {
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_6));
 			    Thread.sleep(100);
 			    
+			    //Press ENTER after entering auth
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.ENTER)); 
 			    
+			    
+			    //Press on SKIPTOUR
 			    Thread.sleep(5000);
 				WebElement skiptour = driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Skip Tour\"]"));
 		    	skiptour.click();
 		    	
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-				driver.findElement(AppiumBy.accessibilityId("Ok, got it!")).click();
+                driver.findElement(AppiumBy.accessibilityId("Ok, got it!")).click();
 				
                 //Add stock to watchlist
+                
+//				driver.findElement(AppiumBy.accessibilityId("Search & Add Stock")).click();
+//                
+//                Thread.sleep(2000);
+//				List<String> stockList = List.of("WIPRO", "INFY", "RCF","HDFCBANK","RELIANCE","ZOMATO");
+//		        for(int i= 0;i<stockList.size();i++) {
+//		        	WebElement searchStocks = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='0']"));
+//		        	searchStocks.sendKeys(stockList.get(i));
+//		        	
+//		        	Thread.sleep(3000);
+////		        	WebElement addStock = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='0']"));
+////		        	addStock.click();
+////		        	System.out.println(addStock);
+//			        driver.findElement(AppiumBy.accessibilityId("Clear")).click();	
+//		        }
+//		        
+//		        driver.findElement(AppiumBy.accessibilityId("Done")).click();
+
 				driver.findElement(AppiumBy.accessibilityId("Search & Add Stock")).click();
 
 				Thread.sleep(3000);
 				WebElement searchStock = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='0']"));
 				searchStock.click();
 				searchStock.sendKeys("TCS");
-				
 				
 				Thread.sleep(2000);
 				WebElement AddToWatchlist = driver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"EQ\n"
@@ -129,6 +150,7 @@ public class Login {
 				
 				driver.findElement(AppiumBy.accessibilityId("Done")).click();
 				
+								
 				//Place order
 				Thread.sleep(5000);
 
@@ -150,14 +172,26 @@ public class Login {
 				WebElement clickBuy = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@content-desc=\"Buy\"]"));
 				clickBuy.click();
 				
+                
+     //tools tab
+                
+                Thread.sleep(5000);
+				driver.findElement(AppiumBy.accessibilityId("Tools\n"
+						+ "Tab 3 of 5")).click();
+				driver.findElement(AppiumBy.accessibilityId("Strategy store\n"
+						+ "Pre-defined strategies to help you make your decision easier")).click();
 				
-				driver.findElement(AppiumBy.accessibilityId("Delivery\n"
-						+ "1.0X\n"
-						+ "Max Qty 0\n"
-						+ "Tab 3 of 3")).click();
+				WebElement strategyStore = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='10']"));
+				strategyStore.click();
 				
-				WebElement buyDelivery = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@content-desc=\"Buy\"]"));
-                buyDelivery.click();
+				driver.findElement(AppiumBy.accessibilityId("Bull Call Spread\n"
+						+ "View all")).click();
+				driver.findElement(AppiumBy.accessibilityId("Continue")).click();
+
+				driver.findElement(AppiumBy.accessibilityId("Execute")).click();
+				
+				
+
 		}
 }
     
