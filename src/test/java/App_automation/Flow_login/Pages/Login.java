@@ -6,10 +6,12 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import java.net.URL;
 import java.time.Duration;
+
+
 import org.openqa.selenium.WebElement;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+ import io.appium.java_client.android.options.UiAutomator2Options;
 
 
 public class Login {
@@ -49,8 +51,8 @@ public class Login {
 			
 	    	
 	    	//find element for "continue" and click
-	    	driver.findElement(AppiumBy.accessibilityId("Continue")).click();
-			
+		WebElement continu =driver.findElement(AppiumBy.accessibilityId("Continue"));
+		continu.click();
 	    	
 	    	//Find element for USERID on login page and send keys
 
@@ -63,6 +65,7 @@ public class Login {
 			//Find element for password on login page and send keys
                 Thread.sleep(3000);
 				WebElement password = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@index='7']"));
+				password.isDisplayed();
 	    	    password.click();
 				password.sendKeys("Astha@123");
 				
@@ -72,10 +75,10 @@ public class Login {
 				
 		    //Find element for sign in button and click
 				Thread.sleep(2000);
-				driver.findElement(AppiumBy.accessibilityId("Sign in")).click();
-				
+				WebElement signin =driver.findElement(AppiumBy.accessibilityId("Sign in"));
+				signin.isDisplayed();
+				signin.click();
 			//FInd number key on keypad and click a digit
-//				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
 				Thread.sleep(5000);
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_1));
 			    driver.pressKey(new KeyEvent().withKey(AndroidKey.DIGIT_2));
@@ -86,11 +89,14 @@ public class Login {
 			    Thread.sleep(100);
 
 			    //click on verify after entering TOTP
-				driver.findElement(AppiumBy.accessibilityId("Verify")).click();
+			    WebElement verify=driver.findElement(AppiumBy.accessibilityId("Verify"));
+			    verify.isDisplayed();
+			    verify.click();
 				
 				
-				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"I’ll do it later\"]")).click();
-
+			    WebElement do_it_later=driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"I’ll do it later\"]"));
+			    do_it_later.isDisplayed();
+			    do_it_later.click();
 				driver.findElement(AppiumBy.xpath("//android.widget.Button[@content-desc=\"Enable Device Lock\"]")).click();
 
 				
@@ -150,6 +156,7 @@ public class Login {
 				
 				driver.findElement(AppiumBy.accessibilityId("Done")).click();
 				
+				
 								
 				//Place order
 				Thread.sleep(5000);
@@ -172,16 +179,37 @@ public class Login {
 				WebElement clickBuy = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@content-desc=\"Buy\"]"));
 				clickBuy.click();
 				
+				
+
+				
                 
      //tools tab
                 
                 Thread.sleep(5000);
 				driver.findElement(AppiumBy.accessibilityId("Tools\n"
 						+ "Tab 3 of 5")).click();
+				
+				//delete basket before executing a strategy
+				WebElement deleteBasket = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='2']"));
+				deleteBasket.click();
+				
+				driver.findElement(AppiumBy.accessibilityId("Edit")).click();
+
+				
+				WebElement basketDelete = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='1']"));
+				basketDelete.click();
+				
+				driver.findElement(AppiumBy.accessibilityId("Done")).click();
+				
+				WebElement backToTools = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='0']"));
+				backToTools.click();
+				
+				//strategy store
 				driver.findElement(AppiumBy.accessibilityId("Strategy store\n"
 						+ "Pre-defined strategies to help you make your decision easier")).click();
 				
 				WebElement strategyStore = driver.findElement(AppiumBy.xpath("//android.widget.ImageView[@index='10']"));
+			
 				strategyStore.click();
 				
 				driver.findElement(AppiumBy.accessibilityId("Bull Call Spread\n"
@@ -190,9 +218,34 @@ public class Login {
 
 				driver.findElement(AppiumBy.accessibilityId("Execute")).click();
 				
+				//stock details and chart
+				Thread.sleep(3000);
+				driver.findElement(AppiumBy.accessibilityId("Watchlist\n"
+						+ "Tab 2 of 5")).click();
+//				
+     			driver.findElement(AppiumBy.accessibilityId("Default\n"
+     					+ "Tab 3 of 3")).click();
+     			
+     			driver.findElement(AppiumBy.accessibilityId("NIFTY\n"
+     					+ "NSE\n"
+     					+ "Nifty\n"
+     					+ "20133.30\n"
+     					+ "59.05(0.29%)")).click();
+     			
+     			driver.findElement(AppiumBy.accessibilityId("View Chart")).click();
+     			
+     			WebElement timeFrame = driver.findElement(AppiumBy.xpath("android.widget.TextView[@index='0']"));
+     			timeFrame.click();
 				
 
+     			WebElement chooseTime = driver.findElement(AppiumBy.xpath("android.view.View[@index='14']"));
+     			chooseTime.click();
+     			
+     			WebElement go_back_toBottomsheet = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='4']"));
+     			go_back_toBottomsheet.click();
 		}
+
+
 }
     
 
