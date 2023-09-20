@@ -190,19 +190,19 @@ public class Login {
 						+ "Tab 3 of 5")).click();
 				
 				//delete basket before executing a strategy
-				WebElement deleteBasket = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='2']"));
-				deleteBasket.click();
-				
-				driver.findElement(AppiumBy.accessibilityId("Edit")).click();
-
-				
-				WebElement basketDelete = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='1']"));
-				basketDelete.click();
-				
-				driver.findElement(AppiumBy.accessibilityId("Done")).click();
-				
-				WebElement backToTools = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='0']"));
-				backToTools.click();
+//				WebElement deleteBasket = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='2']"));
+//				deleteBasket.click();
+//				
+//				driver.findElement(AppiumBy.accessibilityId("Edit")).click();
+//
+//				
+//				WebElement basketDelete = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='1']"));
+//				basketDelete.click();
+//				
+//				driver.findElement(AppiumBy.accessibilityId("Done")).click();
+//				
+//				WebElement backToTools = driver.findElement(AppiumBy.xpath("android.widget.ImageView[@index='0']"));
+//				backToTools.click();
 				
 				//strategy store
 				driver.findElement(AppiumBy.accessibilityId("Strategy store\n"
